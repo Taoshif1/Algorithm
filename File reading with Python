@@ -1,0 +1,49 @@
+file_name = "graph.txt"
+
+adjacency_list = []
+
+try:
+    with open(file_name, 'r') as graph_file:
+        first_line = graph_file.readline()
+
+        parts = first_line.strip().split()
+
+        number_of_vertices = int(parts[0])
+        number_of_edges = int(parts[1])
+
+        for i in range(number_of_vertices):
+            adjacency_list.append([])
+
+        print(f"Reading graph data from: {file_name}")
+
+        for i in range(number_of_edges):
+            edge_line = graph_file.readline()
+
+            edge_parts = edge_line.strip().split()
+
+            source_vertex = int(edge_parts[0])
+            destination_vertex = int(edge_parts[1])
+            edge_weight = int(edge_parts[2])
+
+            adjacency_list[source_vertex].append((destination_vertex, edge_weight))
+
+except FileNotFoundError:
+    print(f"Error: The file '{file_name}' was not found. Please make sure it's in the same directory as your script.")
+    exit(1)
+
+print("\n--- Graph Adjacency List Representation ---")
+
+for i, list_of_edges in enumerate(adjacency_list):
+    print(f"Vertex {i}:", end="")
+
+    if not list_of_edges:
+        print(" (No outgoing edges)")
+    else:
+        for edge_info in list_of_edges:
+            destination = edge_info[0]
+            weight = edge_info[1]
+
+            print(f" -> ({destination}, {weight})", end="")
+        print()
+
+print("\n--- Graph reading complete ---")
