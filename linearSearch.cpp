@@ -92,7 +92,6 @@ int main() {
         cout << setw(10) << n << " | " << setw(15) << average_duration << endl;
         csv << n << "," << average_duration << "\n";  // save to CSV
 }
-
         csv.close();  // close file
 
     return 0;
